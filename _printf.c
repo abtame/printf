@@ -1,53 +1,41 @@
-#include <stdarg.h>
 #include "main.h"
-#include <stddef.h>
 /**
- * _printf - print anything
- * @format: arguments
- * Return: number of characters printed
+ * _printf - Print all this parameters
+ * @format: input
+ *
+ * Description: function that prints output
+ *
+ * Return: The output character or num
  */
 int _printf(const char *format, ...)
 {
-	va_list arguments;
-	const char *p;
-	int num = 0;
+	int x = 0, o_p = 0;
+	char *ptr = (char *) format, *output_p;
+	int (*ptr_func)(va_list, char *, int);
+	va_list vlist;
 
-	if (format == NULL)
+	if (!format)
 		return (-1);
-	va_start(arguments, format);
-	for (p = format; *p; p++)
+	va_start(vlist, format);
+	output_p = malloc(sizeof(char) * SIZE);
+	if (!output_p)
+		return (1);
+	while (format[x])
 	{
-		if (*p == '%' && *p + 1 == '%')
+		if (format[x] != '%')
+			output_p[o_p] = format[x], o_p++;
+		else if (s_trlen(ptr) != 1)
 		{
-			_putchar(*p), num++;
-			continue;
-		}
-		else if (*p == '%' && *p + 1 != '%')
-		{
-			switch (*++p)
-			{
-				case 's':
-					num += fun_string(arguments);
-					break;
-				case 'c':
-					num += fun_character(arguments);
-					break;
-				case '%':
-					_putchar('%'), num++;
-					break;
-				case '\0':
-					return (-1);
-				case 'i':
-				case 'd':
-					num += fun_integer(arguments);
-					break;
-				default:
-					_putchar('%'), _putchar(*p), num += 2;
-			}
+			ptr_func = format_type(++ptr);
+			if (!ptr_func)
+				output_p[o_p] = format[x], o_p++;
+			else
+				o_p = ptr_func(vlist, output_p, o_p), x++;
 		}
 		else
-			_putchar(*p), num++;
+			o_p = -1;
+		x++, ptr++;
 	}
-va_end(arguments);
-return (num);
-}
+	va_end(vlist);
+	write(1, output_p, o_p);
+	free(output_p);
