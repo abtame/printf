@@ -41,5 +41,3 @@ int _printf(const char *format, ...)
 	free(output_p);
 	return (o_p);
 }
-
-
