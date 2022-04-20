@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "holberton.h"
+=======
+#include "main.h"
+>>>>>>> 98447f3f327cc1dc00922b8a677f9499a45a3eb8
 /**
  * _printf - Print all this parameters
  * @format: input
@@ -39,5 +43,8 @@ int _printf(const char *format, ...)
 	va_end(vlist);
 	write(1, output_p, o_p);
 	free(output_p);
+<<<<<<< HEAD
 	return (o_p);
 }
+=======
+>>>>>>> 98447f3f327cc1dc00922b8a677f9499a45a3eb8

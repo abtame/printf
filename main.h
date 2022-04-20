@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #ifndef _HOLBERTON_H
 #define _HOLBERTON_H
+=======
+  #ifndef _MAIN_H
+#define _MAIN_H
+>>>>>>> 98447f3f327cc1dc00922b8a677f9499a45a3eb8
 
 #define SIZE 2048
 
